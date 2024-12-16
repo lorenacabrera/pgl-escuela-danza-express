@@ -1,0 +1,27 @@
+services:
+    db:
+        image: mysql:8.0.35-debian
+#        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=dam
+            - MYSQL_DATABASE=dam
+            - MYSQL_USER=dam
+            - MYSQL_PASSWORD=dam
+        volumes:
+            - mysql_data:/var/lib/mysql:rw
+            - .db:/sql-scripts
+
+    adminer:
+        image: adminer:latest
+        depends_on:
+            - db
+        restart: always
+        ports:
+            - "8080:8080"
+
+volumes:
+    mysql_data:
+        external: true
