@@ -51,7 +51,7 @@ CREATE TABLE clase (
     max_estudiantes INT NOT NULL,
     id_profesor INT NOT NULL,
     CONSTRAINT pk_clase PRIMARY KEY (id_clase),
-    CONSTRAINT fk_clase_profesor FOREIGN KEY (id_profesor) REFERENCES   profesor(id_profesor)
+    CONSTRAINT fk_clase_profesor FOREIGN KEY (id_profesor) REFERENCES profesor(id_profesor)
 );
 
 CREATE TABLE inscripcion (
