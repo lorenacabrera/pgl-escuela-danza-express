@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "dam",
+    "password": "dam",
+    "database": "dam",
     "host": "127.0.0.1",
-    "dialect": "sqlite"
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
