@@ -1,11 +1,11 @@
-const dbConfig = require("../config/db.config.js");
+import { dbConfig } from "../config/db.config.js";
 
-const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
+    host: dbConfig.host,
     dialect: dbConfig.dialect,
     operatorsAliases: false,
-
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
@@ -14,11 +14,14 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     }
 });
 
-const db = {};
+// const db = {};
+// 
+// db.Sequelize = Sequelize; // Sequelize export
+// db.sequelize = sequelize; // Sequelize object
+// 
+// db.EIDG = require("./Alumna.model.js")(sequelize,Sequelize);
+// 
+// module.exports = db;
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+export { sequelize }
 
-db.EIDG = require("./Alumna.model.js")(sequelize,Sequelize);
-
-module.exports = db;
