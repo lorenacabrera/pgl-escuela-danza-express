@@ -12,11 +12,11 @@ exports.create = (req, res) => {
         
     }
 
-    const imageUrl = req.file ? `/public/images/${req.file.filename}` : null;
+    // const imageUrl = req.file ? `/public/images/${req.file.filename}` : null;
 
     const nuevoAlumno = {
         nombre: req.body.nombre,
-        imageUrl: imageUrl,
+//        imageUrl: imageUrl,
     };
 
     Alumno.create(nuevoAlumno).then(data => {
@@ -61,7 +61,7 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
         Alumno.update(req.body, {
-            where: { id_alumno: id }
+            where: { id: id }
         })
             .then(num => {
                 if (num == 1) {
@@ -85,7 +85,7 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Alumno.destroy({
-        where: { id_alumno: id }
+        where: { id: id }
     })
         .then(num => {
             if (num == 1) {
