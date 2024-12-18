@@ -1,12 +1,12 @@
 meta {
-  name: crea-alumno
+  name: borra-alumno
   type: http
   seq: 5
 }
 
-post {
-  url: http://localhost:8081/api/alumno
-  body: json
+delete {
+  url: http://localhost:8081/api/alumno/2
+  body: none
   auth: none
 }
 

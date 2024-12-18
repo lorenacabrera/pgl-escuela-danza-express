@@ -1,0 +1,17 @@
+meta {
+  name: actualiza-nivel
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{scheme}}://{{host}}:{{port}}/api/nivel/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "medio"
+  }
+}
