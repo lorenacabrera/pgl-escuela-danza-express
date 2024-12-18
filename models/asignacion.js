@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Asignacion.init({
-    profesorId: { DataTypes.INTEGER, allowNull: false },
-    claseId: { DataTypes.INTEGER, allowNull: false }
+    profesorId: { type: DataTypes.INTEGER, allowNull: false },
+    claseId: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
     modelName: 'Asignacion',

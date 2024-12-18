@@ -14,14 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Nivel.init({
-    nombre: DataTypes.STRING(50),
-    allowNull: false;
-  }, {
+    nombre: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    }
+  },
+  {
     sequelize,
     modelName: 'Nivel',
     tableName: 'nivel',
     createdAt: 'created_at',
-    updatedAt: 'updated_at
+    updatedAt: 'updated_at'
   });
   return Nivel;
-};
+}

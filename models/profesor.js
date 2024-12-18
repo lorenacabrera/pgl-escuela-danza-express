@@ -14,16 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profesor.init({
-    nombre:  {
-        DataTypes.STRING(50),
-        allowNull: false
+    nombre: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     },
     apellido1: DataTypes.STRING,
     email: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Profesor',
-    tableName: 'profesor'
+    tableName: 'profesor',
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });

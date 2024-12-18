@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Matricula.init({
     alumnoId: {
-        DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'alumno_id'
     },
     claseId: {
-        DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'clase_id'
     }

@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Clase.init({
-    nombre: { DataTypes.STRING, allowNull: false },
-    nivelId: { DataTypes.INTEGER, allowNull: false, field: 'nivel_id' }
+    nombre: { type: DataTypes.STRING, allowNull: false },
+    nivelId: { type: DataTypes.INTEGER, allowNull: false, field: 'nivel_id' }
   }, {
     sequelize,
     modelName: 'Clase',
