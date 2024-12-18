@@ -11,7 +11,7 @@ services:
             - MYSQL_USER=dam
             - MYSQL_PASSWORD=dam
         volumes:
-            - mysql_data:/var/lib/mysql:rw
+            - pgl-escuela-danza-data:/var/lib/mysql:rw
             - ./db:/sql-scripts
 
     adminer:
@@ -23,5 +23,5 @@ services:
             - "8080:8080"
 
 volumes:
-    mysql_data:
+    pgl-escuela-danza-data:
         external: true
