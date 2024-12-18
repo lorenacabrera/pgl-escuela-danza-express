@@ -4,11 +4,15 @@
 
 Lanzar el servicio web
 
-  $ docker create volume pgl-escuela-danza-data
-  $ ./launch-docker-compose
-  $ ./yarn install
-  $ ./node index.js
-
+```bash
+$ docker create volume pgl-escuela-danza-data
+$ ./launch-docker-compose
+$ ./yarn install
+$ yarn sequelize-cli db:migrate
+$ ./node index.js
+```
 Ejecutar cliente MySQL
 
-  $ ./launch-mysql-client.sh
+```bash
+$ ./launch-mysql-client.sh
+```
