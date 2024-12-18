@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Nivel',
     tableName: 'nivel',
+    timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });

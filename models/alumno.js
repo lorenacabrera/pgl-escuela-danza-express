@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Alumno',
     tableName: 'alumno',
+    timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });
