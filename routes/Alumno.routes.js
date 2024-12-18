@@ -12,13 +12,13 @@ module.exports = app => {
     router.get("/", Alumno.findAll);
 
     // Obtener una alumna por ID
-    router.get(":id", Alumno.findOne);
+    router.get("/:id", Alumno.findOne);
 
     // Actualizar una alumna por ID
-    router.put(":id", Alumno.update);
+    router.put("/:id", Alumno.update);
 
     // Eliminar una alumna por ID
-    router.delete(":id", Alumno.delete);
+    router.delete("/:id", Alumno.delete);
 
     // Usamos el router con el prefijo '/api/alumnas'
     app.use('/api/alumno', router);
