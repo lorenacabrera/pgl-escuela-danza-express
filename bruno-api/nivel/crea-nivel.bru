@@ -6,6 +6,12 @@ meta {
 
 post {
   url: {{scheme}}:{{host}}:{{port}}/api/nivel
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "nombre": "avanzado"
+  }
 }
