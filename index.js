@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/Alumno.routes")(app);
+require("./routes/nivel")(app)
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
