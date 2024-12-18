@@ -1,0 +1,17 @@
+meta {
+  name: actualiza-alumno
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:8081/api/alumno/3
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "pepito"
+  }
+}

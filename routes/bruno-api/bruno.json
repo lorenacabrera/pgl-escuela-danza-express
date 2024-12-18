@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "pgl-escuela-danza",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

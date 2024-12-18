@@ -1,0 +1,17 @@
+meta {
+  name: borra-alumno
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:8081/api/alumno/5
+  body: none
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "jane"
+  }
+}

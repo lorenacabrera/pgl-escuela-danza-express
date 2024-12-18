@@ -1,0 +1,17 @@
+meta {
+  name: crea-alumno
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8081/api/alumno
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "jane"
+  }
+}
