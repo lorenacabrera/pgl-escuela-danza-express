@@ -10,16 +10,16 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./models");
-db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-});
+// const db = require("./models");
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+// });
 
 app.get("/", (req, res) => {
-    res.json({ message: "Bienvenido a la Escuela de Ballet" });
+    res.json({ message: "Bienvenida/o a la escuela de danza" });
 });
 
-require("./routes/Alumna.routes")(app);
+require("./routes/Alumno.routes")(app);
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

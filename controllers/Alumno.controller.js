@@ -1,53 +1,50 @@
 const db = require("../models");
-const Alumna = db.Alumna;
+const Alumno = db.Alumno;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.id_alumna || !req.body.nombre){
+    if (!req.body.nombre){
         res.status(400).send({
-            message: "Los campos id_alumna y nombre son obligatorios!"
+            message: "El campo nombre es obligatorio"
         });
+
         return;
         
     }
 
     const imageUrl = req.file ? `/public/images/${req.file.filename}` : null;
 
-const nuevaAlumna = {
-    id_alumna: req.body.id_alumna,
-    nombre: req.body.nombre,
-    imageUrl: imageUrl,
+    const nuevoAlumno = {
+        nombre: req.body.nombre,
+        imageUrl: imageUrl,
+    };
+
+    Alumno.create(nuevoAlumno).then(data => {
+        res.status(201).send(data);
+    }).catch(err => {
+        res.status(500).send({ message: err.message || "Error al crear la alumno." });
+    });
 };
 
-Alumna.create(nuevaAlumna)
-    .then(data => {
-        res.status(201).send(data);
-    })
-    .catch(err => {
-        res.status(500).send({
-         message: err.message || "Error al crear la alumna."
-    });
-});
-};
 exports.findAll = (req, res) => {
-    Alumna.findAll()
+    Alumno.findAll()
     .then(data => {
         res.send(data);
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || "Ocurrió un error al obtener las alumnas."
+            message: err.message || "Ocurrió un error al obtener las alumnos."
         });
     });
 };
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Alumna.findByPk(id)
+    Alumno.findByPk(id)
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `No se encontró una alumna con id=${id}.`
+                    message: `No se encontró una alumno con id=${id}.`
                 });
             } else {
                 res.send(data);
@@ -55,7 +52,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: `Error al obtener la alumna con id=${id}.`
+                message: `Error al obtener la alumno con id=${id}.`
             });
         });
 };
@@ -63,23 +60,23 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-        Alumna.update(req.body, {
-            where: { id_alumna: id }
+        Alumno.update(req.body, {
+            where: { id_alumno: id }
         })
             .then(num => {
                 if (num == 1) {
                     res.send({
-                        message: "La alumna fue actualizada correctamente."
+                        message: "La alumno fue actualizada correctamente."
                     });
                 } else {
                     res.send({
-                        message: `No se pudo actualizar la alumna con id=${id}. Tal vez no se encontró o los datos están vacíos.`
+                        message: `No se pudo actualizar la alumno con id=${id}. Tal vez no se encontró o los datos están vacíos.`
                     });
                 }
             })
             .catch(err => {
                 res.status(500).send({
-                    message: `Error al actualizar la alumna con id=${id}.`
+                    message: `Error al actualizar la alumno con id=${id}.`
                 });
             });
 };
@@ -87,23 +84,23 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Alumna.destroy({
-        where: { id_alumna: id }
+    Alumno.destroy({
+        where: { id_alumno: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "La alumna fue eliminada correctamente."
+                    message: "La alumno fue eliminada correctamente."
                 });
             } else {
                 res.send({
-                    message: `No se pudo eliminar la alumna con id=${id}. Tal vez no se encontró.`
+                    message: `No se pudo eliminar la alumno con id=${id}. Tal vez no se encontró.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: `Error al eliminar la alumna con id=${id}.`
+                message: `Error al eliminar la alumno con id=${id}.`
             });
         });
 };
