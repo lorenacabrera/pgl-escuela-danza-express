@@ -1,28 +1,50 @@
 const express = require("express");
-const cors = require("cors");  // Importar el middleware CORS
-const app = express();
+const cors = require("cors");
 const path = require('path');
+const app = express();
 
+// --- Configuración CORS para Ionic ---
+const corsOptions = {
+    origin: "http://localhost:8100" // Ionic por defecto corre en 8100
+};
+app.use(cors(corsOptions));
 
-// Habilitar CORS para todas las rutas y orígenes
-app.use(cors());  
+// --- Middleware ---
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// const db = require("./models");
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.");
-// });
+// --- Base de datos (Sequelize) ---
+const db = require("./models");
+// db.sequelize.sync({ force: true }).then(() => console.log("Drop and re-sync db."));
 
+// --- Ruta de bienvenida ---
 app.get("/", (req, res) => {
     res.json({ message: "Bienvenida/o a la escuela de danza" });
 });
 
-require("./routes/Alumno.routes")(app);
-require("./routes/nivel")(app)
+// --- Rutas de la API ---
+// Ajusta el nombre según tu archivo real: mayúscula o minúscula
+try {
+    require("./routes/Alumno.routes")(app); // si tu archivo se llama Alumno.routes.js
+} catch (err) {
+    try {
+        require("./routes/alumno.routes")(app); // si tu archivo se llama alumno.routes.js
+    } catch (err) {
+        console.error("No se pudo cargar la ruta de Alumno:", err.message);
+    }
+}
 
-const PORT = process.env.PORT || 8081;
+// Nivel
+try {
+    require("./routes/nivel.routes")(app); // nombre en minúscula
+} catch (err) {
+    console.error("No se pudo cargar la ruta de Nivel:", err.message);
+}
+
+// --- Puerto del backend ---
+// Cambié a 3000 para evitar conflicto con Adminer (8081)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
