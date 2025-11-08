@@ -22,8 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Alumno',
     tableName: 'alumno',
     timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    underscored: true
+    //reatedAt: 'created_at',
+    //updatedAt: 'updated_at'
   });
   return Alumno;
 };
