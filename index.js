@@ -23,13 +23,12 @@ app.get("/", (req, res) => {
     res.json({ message: "Bienvenida/o a la escuela de danza" });
 });
 
-// --- Rutas de la API ---
-// Ajusta el nombre según tu archivo real: mayúscula o minúscula
+// Ajusta el nombre: mayúscula o minúscula
 try {
-    require("./routes/Alumno.routes")(app); // si tu archivo se llama Alumno.routes.js
+    require("./routes/Alumno.routes")(app); // si el archivo se llama Alumno.routes.js
 } catch (err) {
     try {
-        require("./routes/alumno.routes")(app); // si tu archivo se llama alumno.routes.js
+        require("./routes/alumno.routes")(app); // si el archivo se llama alumno.routes.js
     } catch (err) {
         console.error("No se pudo cargar la ruta de Alumno:", err.message);
     }
@@ -42,7 +41,7 @@ try {
     console.error("No se pudo cargar la ruta de Nivel:", err.message);
 }
 
-// --- Puerto del backend ---
+
 // Cambié a 3000 para evitar conflicto con Adminer (8081)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -16,6 +16,7 @@ exports.create = (req, res) => {
 
     const nuevoAlumno = {
         nombre: req.body.nombre,
+        apellido1: req.body.apellido1 || null,
 //        imageUrl: imageUrl,
     };
 
