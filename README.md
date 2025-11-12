@@ -19,8 +19,5 @@ $ ./launch-mysql-client.sh
 
 Api Bruno:
 
-
-
-
-<img width="428" height="255" alt="image" src="https://github.com/user-attachments/assets/e7027d0f-5e36-44f5-95d7-8a4a1e090739" />
+https://github.com/usebruno/bruno.git
 
