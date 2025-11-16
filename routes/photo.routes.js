@@ -25,16 +25,16 @@ module.exports = (app) => {
     // Actualizar foto
     app.put("/photos/:id", (req, res) => {
         const id = parseInt(req.params.id);
-        const { base64, title, description } = req.body;
         const photo = photos.find(p => p.id === id);
         if (!photo) return res.status(404).json({ message: "Foto no encontrada" });
-
+    
+        const { base64, title, description } = req.body;
         if (base64) photo.base64 = base64;
         if (title) photo.title = title;
         if (description) photo.description = description;
-
+    
         res.json(photo);
-    });
+      });
 
     // Eliminar foto
     app.delete("/photos/:id", (req, res) => {

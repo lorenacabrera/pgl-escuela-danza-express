@@ -1,0 +1,21 @@
+meta {
+  name: lista-fotos
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/photos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "base64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
+    "title": "Foto de prueba",
+    "description": "Solo para test"
+  }
+  
+  
+}
