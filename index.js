@@ -41,6 +41,14 @@ try {
     console.error("No se pudo cargar la ruta de Nivel:", err.message);
 }
 
+//photo
+
+try {
+    require("./routes/photo.routes")(app);
+} catch (err) {
+    console.error("No se pudo cargar la ruta de Photos:", err.message);
+}
+
 
 // Cambié a 3000 para evitar conflicto con Adminer (8081)
 const PORT = process.env.PORT || 3000;
