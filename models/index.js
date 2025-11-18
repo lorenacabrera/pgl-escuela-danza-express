@@ -39,6 +39,10 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+/*db.sequelize.sync({ alter: true })
+  .then(() => console.log("Todas las tablas se sincronizaron correctamente."))
+  .catch(err => console.error("Error sincronizando las tablas:", err));*/
+
 
 db.usuario = require("./usuario.js")(sequelize, Sequelize);
 
