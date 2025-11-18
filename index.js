@@ -49,13 +49,15 @@ try {
     console.error("No se pudo cargar la ruta de Photos:", err.message);
 }
 
-//basic
+//auth
 
-try{
-    require("./routes/basic.routes")(app);
-} catch(err){
-    console.error("no se pudo cargar la ruta de basic:",err.message);
+// Auth
+try {
+    require("./routes/auth.routes")(app);
+} catch (err) {
+    console.error("Error cargando auth.routes:", err.message);
 }
+
 
 // Cambié a 3000 para evitar conflicto con Adminer (8081)
 const PORT = process.env.PORT || 3000;
