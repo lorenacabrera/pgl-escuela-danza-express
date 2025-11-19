@@ -6,6 +6,14 @@ meta {
 
 post {
   url: http://localhost:3000/login-token
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "test@test.com",
+    "password": "1234"
+  }
+  
 }
