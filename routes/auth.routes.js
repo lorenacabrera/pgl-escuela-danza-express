@@ -8,9 +8,11 @@ module.exports = (app) => {
   const db = require("../models");
   const Usuario = db.usuario;
 
-  // ============================
-  //  REGISTRO (con contraseña ENCRIPTADA)
-  // ============================
+  // Importar middlewares ANTES de usarlos
+  const basicAuth = require("../middlewares/basicAuth");
+  const verifyToken = require("../middlewares/verifyToken");
+
+ //registro encriptado
   router.post("/register", async (req, res) => {
     const { email, password } = req.body;
 
@@ -19,13 +21,11 @@ module.exports = (app) => {
     }
 
     try {
-      // comprobar si existe
       const existe = await Usuario.findOne({ where: { email } });
       if (existe) {
         return res.status(400).json({ message: "El usuario ya existe" });
       }
 
-      // encriptar password
       const hashedPass = await bcrypt.hash(password, 10);
 
       const newUser = await Usuario.create({
@@ -37,35 +37,21 @@ module.exports = (app) => {
         message: "Usuario registrado correctamente",
         userId: newUser.id,
       });
+
     } catch (err) {
       res.status(500).json({ message: "Error registrando usuario", error: err });
     }
   });
 
-  // ============================
-  //  LOGIN BÁSICO
-  // ============================
-  router.post("/login-basic", async (req, res) => {
-    const { email, password } = req.body;
-
-    const user = await Usuario.findOne({ where: { email } });
-
-    if (!user)
-      return res.status(404).json({ message: "Usuario no encontrado" });
-
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid)
-      return res.status(401).json({ message: "Contraseña incorrecta" });
-
+  //login basico con auth
+  router.post("/login-basic", basicAuth, (req, res) => {
     res.json({
       message: "Autenticación básica exitosa",
-      user: email,
+      usuario: req.usuario.email,
     });
   });
 
-  // ============================
-  //  LOGIN CON TOKEN (JWT)
-  // ============================
+  //login con token JWT
   router.post("/login-token", async (req, res) => {
     const { email, password } = req.body;
 
@@ -90,11 +76,7 @@ module.exports = (app) => {
     });
   });
 
-  // ============================
-  //  RUTA PROTEGIDA con BASIC AUTH
-  // ============================
-  const basicAuth = require("../middlewares/basicAuth");
-
+  //ruta protegida auth
   router.get("/ruta-protegida-basic", basicAuth, (req, res) => {
     res.json({
       message: "Acceso permitido mediante Basic Auth",
@@ -102,11 +84,7 @@ module.exports = (app) => {
     });
   });
 
-  // ============================
-  //  RUTA PROTEGIDA con TOKEN
-  // ============================
-  const verifyToken = require("../middlewares/verifyToken");
-
+  // ruta protegida token
   router.get("/ruta-protegida-token", verifyToken, (req, res) => {
     res.json({
       message: "Acceso permitido mediante Token",
@@ -114,6 +92,5 @@ module.exports = (app) => {
     });
   });
 
-  // Montar rutas
   app.use("/", router);
 };

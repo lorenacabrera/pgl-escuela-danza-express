@@ -1,19 +1,11 @@
 meta {
   name: login-token
   type: http
-  seq: 2
+  seq: 5
 }
 
-post {
-  url: http://localhost:3000/login-token
-  body: json
+get {
+  url: http://127.0.0.1:3000/login-token
+  body: none
   auth: none
-}
-
-body:json {
-  {
-    "email": "test@test.com",
-    "password": "1234"
-  }
-  
 }

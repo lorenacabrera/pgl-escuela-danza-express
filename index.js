@@ -1,66 +1,46 @@
 const express = require("express");
 const cors = require("cors");
-const path = require('path');
-const app = express();
+const path = require("path");
 
-// --- Configuración CORS para Ionic ---
-const corsOptions = {
-    origin: "http://localhost:8100" // Ionic por defecto corre en 8100
-};
-app.use(cors(corsOptions));
+// CORS para permitir llamadas desde Ionic (8100)
 
-// --- Middleware ---
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(cors({ origin: "http://localhost:8100" }));
+
+// Middleware principal
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// --- Base de datos (Sequelize) ---
-const db = require("./models");
-// db.sequelize.sync({ force: true }).then(() => console.log("Drop and re-sync db."));
 
-// --- Ruta de bienvenida ---
+// Servir carpeta "public" (donde están las imágenes)
+// Las fotos estarán accesibles en:
+// http://localhost:3000/public/images/archivo.jpg
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+
+// Base de datos (Sequelize)
+const db = require("./models");
+// reiniciar BD (solo una vez):
+// db.sequelize.sync({ force: true }).then(() => console.log("DB Reset"));
+
 app.get("/", (req, res) => {
-    res.json({ message: "Bienvenida/o a la escuela de danza" });
+  res.json({ message: "Bienvenida/o a la escuela de danza" });
 });
 
-// Ajusta el nombre: mayúscula o minúscula
-try {
-    require("./routes/Alumno.routes")(app); // si el archivo se llama Alumno.routes.js
-} catch (err) {
-    try {
-        require("./routes/alumno.routes")(app); // si el archivo se llama alumno.routes.js
-    } catch (err) {
-        console.error("No se pudo cargar la ruta de Alumno:", err.message);
-    }
-}
+// Alumno
+require("./routes/Alumno.routes")(app);
 
 // Nivel
-try {
-    require("./routes/nivel.routes")(app); // nombre en minúscula
-} catch (err) {
-    console.error("No se pudo cargar la ruta de Nivel:", err.message);
-}
+require("./routes/nivel.routes")(app);
 
-//photo
+// Fotos (CRUD real con Multer)
+require("./routes/foto.routes")(app);
 
-try {
-    require("./routes/photo.routes")(app);
-} catch (err) {
-    console.error("No se pudo cargar la ruta de Photos:", err.message);
-}
-
-//auth
-
-// Auth
-try {
-    require("./routes/auth.routes")(app);
-} catch (err) {
-    console.error("Error cargando auth.routes:", err.message);
-}
+// Autenticación (register, login, token…)
+require("./routes/auth.routes")(app);
 
 
-// Cambié a 3000 para evitar conflicto con Adminer (8081)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server is running on port ${PORT}.`);
 });
