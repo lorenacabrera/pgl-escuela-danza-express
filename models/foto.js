@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     filename: Sequelize.STRING,
     url: Sequelize.STRING
   }, {
-    freezeTableName: true   // ← ESTO ES LO QUE EVITA PLURAL
+    freezeTableName: true   
   });
 
   return Foto;
