@@ -4,8 +4,16 @@ meta {
   seq: 5
 }
 
-get {
+post {
   url: http://127.0.0.1:3000/login-token
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "test@test.com",
+    "password": "123"
+  }
+  
 }

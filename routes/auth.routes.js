@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const SECRET = "mi_clave_secreta_123";
+const SECRET = "12345";
 
 module.exports = (app) => {
   const express = require("express");

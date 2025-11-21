@@ -7,13 +7,22 @@ meta {
 post {
   url: http://localhost:3000/login-basic
   body: json
-  auth: none
+  auth: basic
+}
+
+headers {
+  : 
+}
+
+auth:basic {
+  username: test@test.com
+  password: 1234
 }
 
 body:json {
   {
-    "email": "test@test.com",
-    "password": "123"
+    "email": "lorena@test.com",
+    "password": "1234"
   }
   
 }
